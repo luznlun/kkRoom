@@ -1,5 +1,9 @@
 var React = require('react');
-
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './Header.css';
+import Link from '../Link';
+import Navigation from '../Navigation';
+import logoUrl from './logo-small.png';
 var Header = React.createClass({
 
   componentDidMount: function () {
@@ -11,32 +15,19 @@ var Header = React.createClass({
   },
   render: function(){
     return (
-      <nav className="navbar navbar-default navbar-fixed-top">
-        <div className="container">
-          <div className="navbar-header page-scroll">
-            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#page-top">Chris Home</a>
-          </div>
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
-              <li className="hidden active">
-                <a href="#page-top"></a>
-              </li>
-              <li className="page-scroll">
-                <a href="#portfolio">Portfolio</a>
-              </li>
-              <li className="page-scroll">
-                <a href="#about">About Me</a>
-              </li>
-            </ul>
+      <div className={s.root}>
+        <div className={s.container}>
+          <Navigation className={s.nav} />
+          <Link className={s.brand} to="/">
+            <img src={logoUrl} width="38" height="38" alt="React" />
+            <span className={s.brandTxt}>Your Company</span>
+          </Link>
+          <div className={s.banner}>
+            <h1 className={s.bannerTitle}>React</h1>
+            <p className={s.bannerDesc}>Complex web apps made easy</p>
           </div>
         </div>
-      </nav>
+      </div>
     );
   }
 });

@@ -13,16 +13,37 @@ import s from './Footer.css';
 import Link from '../Link';
 
 function Footer() {
+  var year = new Date().getFullYear();
+
   return (
     <div className={s.root}>
+      <div className={s.infoContainer}>
+          <div className={s.infoSpan}>
+            <h3>LOCATION</h3>
+            <p>San Francisco, CA</p>
+          </div>
+          <div className={s.infoSpan}>
+            <h3>SOCIAL MEDIA</h3>
+            <ul className="list-inline">
+              <li>
+                <a href="https://www.facebook.com/chriscuikk" className="btn-social btn-outline"><i className={"fa fa-fw fa-facebook icon "+ s.icon}></i></a>
+              </li>
+              <li>
+                <a href="https://plus.google.com/u/0/111359600807662559909/posts" className="btn-social btn-outline"><i className={"fa fa-fw fa-google-plus "+ s.icon}></i></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/jiashengcui" className={"btn-social btn-outline "+ s.icon}>
+                  <i className="fa fa-fw fa-linkedin icon"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div className={s.infoSpan}>
+            <h3>MY PHILOSOPHY</h3>
+            <p>Code Accelerates !!</p>
+          </div>
+      </div>
       <div className={s.container}>
-        <span className={s.text}>© Your Company</span>
-        <span className={s.spacer}>·</span>
-        <Link className={s.link} to="/">Home</Link>
-        <span className={s.spacer}>·</span>
-        <Link className={s.link} to="/privacy">Privacy</Link>
-        <span className={s.spacer}>·</span>
-        <Link className={s.link} to="/not-found">Not Found</Link>
+        <span>Copy Right © Chris {year}</span>
       </div>
     </div>
   );
