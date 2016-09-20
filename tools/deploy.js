@@ -15,8 +15,8 @@ import fetch from './lib/fetch';
 // For more information visit http://gitolite.com/deploy.html
 const getRemote = (slot) => ({
   name: slot || 'production',
-  url: `https://git.heroku.com/secret-shelf-77651.git`,
-  website: `http://secret-shelf-77651.herokuapp.com`,
+  url: `https://git@github.com:luznlun/kkRoom.git`,
+  website: `https://chriskkapp.herokuapp.com/`,
 });
 
 /**
@@ -47,7 +47,7 @@ async function deploy() {
   // Push the contents of the build folder to the remote server via Git
   await repo.add('--all .');
   await repo.commit('Update');
-  await repo.push(remote.name, 'master');
+  await repo.push(remote.name, 'deploy');
 
   // Check if the site was successfully deployed
   const response = await fetch(remote.website);
