@@ -17,11 +17,11 @@ import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Html from './components/Html';
-import { ErrorPage } from './routes/error/ErrorPage';
-import errorPageStyle from './routes/error/ErrorPage.css';
 import UniversalRouter from 'universal-router';
 import PrettyError from 'pretty-error';
+import Html from './components/Html';
+import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
+import errorPageStyle from './routes/error/ErrorPage.css';
 import passport from './core/passport';
 import models from './data/models';
 import schema from './data/schema';
@@ -84,32 +84,24 @@ app.use('/graphql', expressGraphQL(req => ({
 // -----------------------------------------------------------------------------
 app.get('*', async (req, res, next) => {
   try {
-    let css = [];
-    let statusCode = 200;
-    const data = { title: '', description: '', style: '', script: assets.main.js, children: '' };
-
-    await UniversalRouter.resolve(routes, {
+    const css = new Set();
+    const route = await UniversalRouter.resolve(routes, {
       path: req.path,
       query: req.query,
       context: {
         insertCss: (...styles) => {
-          styles.forEach(style => css.push(style._getCss())); // eslint-disable-line no-underscore-dangle, max-len
+          styles.forEach(style => css.add(style._getCss())); // eslint-disable-line no-underscore-dangle, max-len
         },
-        setTitle: value => (data.title = value),
-        setMeta: (key, value) => (data[key] = value),
-      },
-      render(component, status = 200) {
-        css = [];
-        statusCode = status;
-        data.children = ReactDOM.renderToString(component);
-        data.style = css.join('');
-        return true;
       },
     });
 
+    const data = { ...route };
+    data.children = ReactDOM.renderToString(route.component);
+    data.style = [...css].join('');
+    data.script = assets.main.js;
     const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
 
-    res.status(statusCode);
+    res.status(route.status || 200);
     res.send(`<!doctype html>${html}`);
   } catch (err) {
     next(err);
@@ -125,17 +117,16 @@ pe.skipPackage('express');
 
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.log(pe.render(err)); // eslint-disable-line no-console
-  const statusCode = err.status || 500;
   const html = ReactDOM.renderToStaticMarkup(
     <Html
       title="Internal Server Error"
       description={err.message}
       style={errorPageStyle._getCss()} // eslint-disable-line no-underscore-dangle
     >
-      {ReactDOM.renderToString(<ErrorPage error={err} />)}
+      {ReactDOM.renderToString(<ErrorPageWithoutStyle error={err} />)}
     </Html>
   );
-  res.status(statusCode);
+  res.status(err.status || 500);
   res.send(`<!doctype html>${html}`);
 });
 
