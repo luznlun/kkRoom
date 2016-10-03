@@ -20,6 +20,27 @@
   max-width: var(--max-content-width);
 }
 
+.wrapper {
+  background: #3498DB;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.imgStyle{
+  border-radius:50px;
+  margin: 0 auto;
+}
+
+.nameStyle span{
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+}
+
 .news {
   padding: 0;
 }

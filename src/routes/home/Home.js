@@ -12,21 +12,17 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
 
 function Home({ news }) {
+  var imgClass = s.imgStyle + " img-responsive";
+  var wrapperClass = s.wrapper +" col-lg-12"
   return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <h1 className={s.title}>React.js News</h1>
-        <ul className={s.news}>
-          {news.map((item, index) => (
-            <li key={index} className={s.newsItem}>
-              <a href={item.link} className={s.newsTitle}>{item.title}</a>
-              <span
-                className={s.newsDesc}
-                dangerouslySetInnerHTML={{ __html: item.contentSnippet }}
-              />
-            </li>
-          ))}
-        </ul>
+    <div className={wrapperClass}>
+    	<a href="https://www.linkedin.com/in/jiashengcui">
+        <img className={imgClass} src="profile.png" alt="Go to my Linkedin page">
+        </img>
+      </a>
+      <div className={s.nameStyle}>
+        <span className="name">Jiasheng(Chris) Cui</span>
+        <span className="skills">Software Developer</span>
       </div>
     </div>
   );
