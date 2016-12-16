@@ -8,18 +8,18 @@
  */
 
 import React from 'react';
-import Contact from './Contact';
+import Aboutme from './Aboutme';
 
-const title = 'Portfolio';
+const title = 'About Me';
 
 export default {
 
-  path: '/portfolio',
+  path: '/aboutme',
 
   action() {
     return {
       title,
-      component: <Contact title={title} />,
+      component: <Aboutme title={title} />,
     };
   },
 

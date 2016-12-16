@@ -30,8 +30,8 @@ export default {
     const { data } = await resp.json();
     if (!data || !data.news) throw new Error('Failed to load the news feed.');
     return {
-      title: 'React Starter Kit',
-      component: <Home news={data.news} />,
+      title: 'Chris\'s Portfolio',
+      component: <Home />,
     };
   },
 

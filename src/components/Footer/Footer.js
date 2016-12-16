@@ -18,11 +18,11 @@ function Footer() {
   return (
     <div className={s.root}>
       <div className={s.infoContainer}>
-          <div className={s.infoSpan}>
+          <div className="col-sm-4 col-xs-12">
             <h3>LOCATION</h3>
             <p>San Francisco, CA</p>
           </div>
-          <div className={s.infoSpan}>
+          <div className="col-sm-4 col-xs-12">
             <h3>SOCIAL MEDIA</h3>
             <ul className="list-inline">
               <li>
@@ -37,7 +37,7 @@ function Footer() {
               </li>
             </ul>
           </div>
-          <div className={s.infoSpan}>
+          <div className="col-sm-4 col-xs-12">
             <h3>MY PHILOSOPHY</h3>
             <p>Code Accelerates !!</p>
           </div>

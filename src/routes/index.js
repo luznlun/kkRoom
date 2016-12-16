@@ -13,6 +13,7 @@ import App from '../components/App';
 // Child routes
 import home from './home';
 import contact from './contact';
+import aboutme from './aboutme';
 import login from './login';
 import register from './register';
 import content from './content';
@@ -28,7 +29,7 @@ export default {
     contact,
     login,
     register,
-
+    aboutme,
     // place new routes before...
     content,
     notFound,
@@ -47,7 +48,7 @@ export default {
       ...route,
 
       // Override the result of child route with extensions
-      title: `${route.title || 'Untitled Page'} - www.reactstarterkit.com`,
+      title: `${route.title || 'Untitled Page'}`,
       description: route.description || '',
       component: <App context={context}>{route.component}</App>,
     };
